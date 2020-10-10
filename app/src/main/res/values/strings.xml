@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">DAM_M08_ACT1</string>
+    <string name="Button">Convertir</string>
+    <string name="textview">TextView</string>
+    <string name="de">De</string>
+    
+    <string-array name="deSpinner">
+        <item>byte</item>
+        <item>kilobyte</item>
+        <item>megabyte</item>
+    </string-array>
 </resources>
