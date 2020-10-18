@@ -4,17 +4,10 @@
     <string name="a">A</string>
     <string name="de">De</string>
     
-    <string-array name="deSpinner">
+    <string-array name="spinners">
         <item>byte</item>
         <item>kilobyte</item>
         <item>megabyte</item>
         <item>gigabyte</item>
-        <item>terabyte</item>
-        <item>petabyte</item>
-        <item>exabyte</item>
-        <item>zetabyte</item>
-        <item>yottabyte</item>
-        <item>brontobyte</item>
-        <item>geopbyte</item>
     </string-array>
 </resources>

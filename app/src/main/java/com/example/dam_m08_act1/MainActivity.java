@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,30 +21,51 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ArrayAdapter<String> namesConvertor = new ArrayAdapter<String>(MainActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.deSpinner));
-        namesConvertor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> spinnersItems = new ArrayAdapter<String>(MainActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.spinners));
+        spinnersItems.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        //Añadir al spinner DE los items
-        Spinner spinnerDe = (Spinner) findViewById(R.id.spinnerDe);
-        spinnerDe.setAdapter(namesConvertor);
+        //SpinnerDe
+        final Spinner spinnerFrom = (Spinner) findViewById(R.id.spinnerDe);
+        spinnerFrom.setAdapter(spinnersItems);
 
-        //Añadir al spinner A los items
-        Spinner spinnerA = (Spinner) findViewById(R.id.spinnerA);
-        spinnerA.setAdapter(namesConvertor);
+        //SpinnerA
+        final Spinner spinnerTo = (Spinner) findViewById(R.id.spinnerA);
+        spinnerTo.setAdapter(spinnersItems);
 
-        //Accion button
+        //Number to Convert
         final TextView resultado = (TextView) findViewById(R.id.result);
-        TextView numeroToConvert = (TextView) findViewById(R.id.editTextNumber);
-        final String result = numeroToConvert.getText().toString();
+        final EditText numeroToConvert = (EditText) findViewById(R.id.editTextNumber);
 
+        //Action Button
         btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Aplicando conversion...", Toast.LENGTH_LONG).show();
-                resultado.setText(result);
+
+                double from = converter(spinnerFrom.getSelectedItem().toString());
+                double to = converter(spinnerTo.getSelectedItem().toString());
+
+                double number = Double.parseDouble(numeroToConvert.getText().toString());
+                double result = (from/to) * number;
+
+                resultado.setText("" + result);
             }
         });
-    }
+
+        }
+
+        public double converter(String spinner) {
+            double conversion = 1;
+
+            if (spinner.equals("kilobyte")) {
+                conversion = 1000;
+            } else if (spinner.equals("megabyte")) {
+                conversion = 1000000;
+            } else if (spinner.equals("gigabyte")) {
+                conversion = 1000000000;
+            }
+            return conversion;
+        }
 }
